@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <!-- Import jQuery --> 
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/colreorder/1.5.4/js/dataTables.colReorder.min.js"></script>
+        
+    </head>
+    <body>
+        <div>
+            <div>  
+                <header>
+                  <div class="container">
+                    <div class="row">  
+                      <!-- Title -->
+                      <h1>Flask Starter Project</h1>
+                    </div>
+                  </div>
+                </header>
+              </div>
+
+              <div>
+                <main>    
+                  <!-- Display flash message --> 
+                  <section class="section--center mdl-grid mdl-grid--no-spacing">   
+                    <div id="flashmessage" class="flash">
+                      {% with messages = get_flashed_messages() %}
+                      {% if messages %}
+                      <ul>
+                        {% for message in messages %}
+                        <li> <strong> {{ message }} </strong> </li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                      {% endwith %}
+                      <!-- Timeout flash message -->
+                      <script>$('#flashmessage').fadeOut(3000);</script>
+                    </div>
+                  </section>
+                
+                  <section>
+                    <header>   
+                      <div class="container">
+                        <div class="row">
+                          <h3>Things</h3>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table id="table_id" class="display table mb-0 table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Student name</th>
+                                        <th>City</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for thing in things %}
+                                    <tr>
+                                        <td>{{thing['id']}}</td>
+                                        <td>{{thing['name']}}</td>
+                                        <td>{{thing['city']}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+                        
+                      </div>     
+                    </header>
+                  </section>
+                
+                </main>
+                </div>
+        </div>
+    </body>
+    <script>    
+    $(document).ready( function () {
+        $('#table_id').DataTable( {
+        "pageLength": 10,
+        "ajax": "http://192.168.1.134:8000/api/",
+    });
+    } );
+    </script>
+</html>
