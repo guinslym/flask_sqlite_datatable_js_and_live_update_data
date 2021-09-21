@@ -78,7 +78,7 @@
         </div>
     </body>
     <script>    
-    $(document).ready(function() {
+
         var table = $('#table_id').DataTable( {
             "ajax": "http://192.168.1.134:8000/api/",
             "columns": [
@@ -90,7 +90,11 @@
         }
             
         );
-} );
+
+        setInterval( function () {
+            table.ajax.reload(); // user paging is not reset on reload
+        }, 30000 );
+
 
 
 setInterval(function(){
