@@ -63,15 +63,6 @@
                                         <th>City</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    {% for thing in things %}
-                                    <tr>
-                                        <td>{{thing['id']}}</td>
-                                        <td>{{thing['name']}}</td>
-                                        <td>{{thing['city']}}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
                             </table>
                         </div>
 
@@ -87,11 +78,21 @@
         </div>
     </body>
     <script>    
-    $(document).ready( function () {
+    $(document).ready(function() {
         $('#table_id').DataTable( {
-        "pageLength": 10,
-        "ajax": "http://192.168.1.134:8000/api/",
-    });
-    } );
+            "ajax": "http://192.168.1.134:8000/api/",
+            "columns": [
+                { "data": "id" },
+                { "data": "name" },
+                { "data": "city" },
+            ]
+            
+        };
+            setTimeout(function(){
+                ('#table_id').DataTable().reload();
+            },2000);
+        );
+} );
+
     </script>
 </html>

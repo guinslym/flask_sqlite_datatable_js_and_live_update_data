@@ -48,19 +48,21 @@ def home():
 
     return render_template('index.html', things=things)
 
-@app.route('/api')
+@app.route('/api/')
 def api():
     generate_new_data()
     things =fetch_data()
-    response=list()
+    response={"data":[]}
+    
     for data in things:
-        response.append(
+        response["data"].append(
             {
                 "id":data['id'],
                 "name":data['name'],
                 "city":data['city'],
             }
         )
+
     return jsonify(response)
 
 
