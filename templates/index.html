@@ -85,12 +85,13 @@
                 { "data": "id" },
                 { "data": "name" },
                 { "data": "city" },
-            ]
-            
-        };
+            ],
             setTimeout(function(){
-                ('#table_id').DataTable().reload();
+                ('#table_id').DataTable().ajax.reload();
             },2000);
+            
+        }
+            
         );
 } );
 
