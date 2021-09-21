@@ -1,10 +1,8 @@
-from flask import Flask, render_template, request, redirect, jsonify
-from flask import json
+from flask import Flask, render_template, jsonify
 
 import sqlite3
 from flask import g
 from faker import Faker
-
 
 app = Flask(__name__)
 
@@ -12,12 +10,12 @@ DATABASE = './database.db'
 
 
 def create_table():
-    conn = sqlite3.connect('./database.db')
+    conn = sqlite3.connect(DATABASE)
     conn.execute('CREATE TABLE students (id integer primary key autoincrement, name TEXT, city TEXT)')
     conn.close()
 
 def fetch_data_in_db():
-    con = sqlite3.connect("./database.db")
+    con = sqlite3.connect(DATABASE)
     con.row_factory = sqlite3.Row
     
     cur = con.cursor()
@@ -29,7 +27,7 @@ def fetch_data_in_db():
 
 def insert_dummy_data_in_db():
     fake = Faker()
-    con = sqlite3.connect("./database.db")
+    con = sqlite3.connect(DATABASE)
     try:
         with con:
             cur = con.cursor()

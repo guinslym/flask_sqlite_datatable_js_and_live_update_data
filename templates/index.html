@@ -79,21 +79,23 @@
     </body>
     <script>    
     $(document).ready(function() {
-        $('#table_id').DataTable( {
+        var table = $('#table_id').DataTable( {
             "ajax": "http://192.168.1.134:8000/api/",
             "columns": [
                 { "data": "id" },
                 { "data": "name" },
                 { "data": "city" },
             ],
-            setTimeout(function(){
-                ('#table_id').DataTable().ajax.reload();
-            },2000);
             
         }
             
         );
 } );
+
+
+setInterval(function(){
+    table.ajax.reload();
+      },5000);
 
     </script>
 </html>
