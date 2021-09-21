@@ -16,7 +16,7 @@ def create_table():
     conn.execute('CREATE TABLE students (id integer primary key autoincrement, name TEXT, city TEXT)')
     conn.close()
 
-def fetch_data():
+def fetch_data_in_db():
     con = sqlite3.connect("./database.db")
     con.row_factory = sqlite3.Row
     
@@ -27,7 +27,7 @@ def fetch_data():
     
     return rows
 
-def generate_new_data():
+def insert_dummy_data_in_db():
     fake = Faker()
     con = sqlite3.connect("./database.db")
     try:
@@ -43,15 +43,15 @@ def generate_new_data():
 
 @app.route('/')
 def home():
-    generate_new_data()
-    things =fetch_data()
+    insert_dummy_data_in_db()
+    things =fetch_data_in_db()
 
     return render_template('index.html', things=things)
 
 @app.route('/api/')
 def api():
-    generate_new_data()
-    things =fetch_data()
+    insert_dummy_data_in_db()
+    things =fetch_data_in_db()
     response={"data":[]}
     
     for data in things:
