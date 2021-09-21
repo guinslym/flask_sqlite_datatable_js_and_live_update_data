@@ -3,7 +3,7 @@
 Example of datatable.js live reload using ajax
 
 ## Install (with poetry)
-	poetry install
+	poetry install 
 
 ## Run the application server (with poetry)
 	poetry run python app.py
